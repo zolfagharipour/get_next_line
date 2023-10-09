@@ -30,7 +30,11 @@ char	*ft_free(t_link *buff)
 
 	str = (char *)malloc(sizeof(char) * buff->len + 1);
 	if (!str)
+	{
+		free(buff->buffer);
+		buff->buffer = NULL;
 		return (NULL);
+	}
 	ft_strlcpy(str, buff->buffer, buff->len + 1);
 	free(buff->buffer);
 	buff->buffer = NULL;
@@ -55,18 +59,22 @@ size_t	ft_strlcpy(char *dst, const char *src, size_t size)
 	return (i);
 }
 
-char	*ft_strjoin(t_link *buff, char *s2, int i)
+char	*ft_strjoin(t_link *buff, char *s2, int *i)
 {
 	char	*str;
 
-	s2[i] = '\0';
-	str = (char *)malloc(sizeof(char) * (buff->len + i +1));
+	s2[*i] = '\0';
+	str = (char *)malloc(sizeof(char) * (buff->len + *i +1));
 	if (!str)
-		return (0);
+	{
+		*i = 0;
+		return (buff->buffer);
+	}
 	ft_strlcpy(str, buff->buffer, buff->len + 1);
-	ft_strlcpy(str + buff->len, s2, i + 1);
-	str[buff->len + i] = '\0';
+	ft_strlcpy(str + buff->len, s2, *i + 1);
+	str[buff->len + *i] = '\0';
 	free(buff->buffer);
-	buff->len += i;
+	buff->buffer = NULL;
+	buff->len += *i;
 	return (str);
 }

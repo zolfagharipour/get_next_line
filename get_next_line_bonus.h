@@ -14,7 +14,7 @@
 # define GET_NEXT_LINE_BONUS_H
 
 # ifndef BUFFER_SIZE
-#  define BUFFER_SIZE 42
+#  define BUFFER_SIZE 1
 # endif
 
 # include <stdio.h>
@@ -37,6 +37,6 @@ char	*ft_readfail(t_link *buff, int i);
 size_t	new_line(t_link *buff);
 size_t	ft_strlcpy(char *dst, const char *src, size_t size);
 char	*ft_free(t_link *buff);
-char	*ft_strjoin(t_link *buff, char *s2, int i);
+char	*ft_strjoin(t_link *buff, char *s2, int *i);
 
 #endif
