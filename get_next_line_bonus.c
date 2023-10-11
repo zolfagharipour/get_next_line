@@ -76,7 +76,7 @@ char	*get_next_line(int fd)
 	int				i;
 	size_t			x;
 
-	if (fd < 0)
+	if (fd < 0 || BUFFER_SIZE <= 0)
 		return (NULL);
 	ft_init(&buff[fd], &i, &x);
 	new = (char *)malloc(sizeof(char) * (BUFFER_SIZE + 1));
@@ -95,32 +95,3 @@ char	*get_next_line(int fd)
 	}
 	return (free(buff[fd].buffer), buff[fd].buffer = NULL, free(new), NULL);
 }
-// int main()
-// {
-// 	int fd = open("oneline_nonl.txt", O_RDONLY);
-
-// 	char *str;
-// 	str = get_next_line(fd);
-// 	while(str)
-// 	{
-// 		printf("%s", str);
-// 		free(str);
-// 		str = get_next_line(fd);
-// 	}
-	
-// 	printf("%s", str);
-// 	free(str);
-
-
-// 	// str = get_next_line(fd);
-// 	// printf("%s", str);
-// 	// free(str);
-
-
-// 	// str = get_next_line(fd);
-// 	// printf("%s", str);
-// 	// free(str);
-
-
-// 	close(fd);
-// }
